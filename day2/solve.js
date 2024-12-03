@@ -27,8 +27,18 @@ function safe(s) {
     return false;
 }
 
+function safe2(s) {
+    if (safe(s)) return true;
+    for (let i = 0; i < s.length; i++) {
+        let newArr = [...s.slice(0, i), ...s.slice(i + 1)];
+        if (safe(newArr)) return true;
+    }
+    return false;
+}
+
 function arraysEqual(a, b) {
     return a.length === b.length && a.every((val, index) => val === b[index]);
 }
 
 console.log(dat.filter(i => safe(i)).length);
+console.log(dat.filter(i => safe2(i)).length);
