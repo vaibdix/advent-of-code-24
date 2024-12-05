@@ -23,3 +23,31 @@ console.log("Part 1:",
         sum + (isValid(update) ? update[Math.floor(update.length / 2)] : 0), 0
     )
 );
+
+
+// Part 2: Sum of middle numbers from sorted invalid updates
+const sortByRules = update => {
+    const sorted = [...update];
+    let changed;
+    do {
+        changed = false;
+        for (let i = 0; i < sorted.length - 1; i++) {
+            for (const [before, after] of rules) {
+                if (sorted[i] === after && sorted[i + 1] === before) {
+                    [sorted[i], sorted[i + 1]] = [sorted[i + 1], sorted[i]];
+                    changed = true;
+                }
+            }
+        }
+    } while (changed);
+    return sorted;
+};
+
+console.log("Part 2:",
+    updates
+        .filter(update => !isValid(update))
+        .reduce((sum, update) => {
+            const sorted = sortByRules(update);
+            return sum + sorted[Math.floor(sorted.length / 2)];
+        }, 0)
+);
