@@ -36,7 +36,7 @@ for (let el = Math.max(...disk2); el > 0; el--) {
                 for (let j = disk2.length - 1; j >= i + count; j--) {
                     if (disk2[j] === el) {
                         disk2[j] = -1;
-                        disk2[i + found++] = e;
+                        disk2[i + found++] = el;
                     }
                 }
                 break;
